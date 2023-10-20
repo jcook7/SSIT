@@ -12,10 +12,11 @@ function [simData,csvFile] = sampleExperimentSim(dataFileName,timeMatrix,NCells)
         if isempty(c)
             error(['No Cells at timepoint t = ',num2str(timeMatrix(i))])
         else
-            if length(c) < NCells
-                error(['Not enough cells in experiment for measuring ',num2str(NCells), ' cells at time t = ',num2str(timeMatrix(i))])
+            if length(c) < NCells(i)
+                error(['Not enough cells in experiment for measuring ',num2str(NCells(i)), ' cells at time t = ',num2str(timeMatrix(i))])
             else
-                ki = randperm(length(c),NCells);
+%                 ki = randperm(length(c),NCells(i));
+                ki = 1:NCells(i);
                 c_pick = c(ki,:);
                 simData = cat(1,simData,c_pick);
             end
